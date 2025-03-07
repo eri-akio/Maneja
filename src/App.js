@@ -3,18 +3,7 @@ import './App.css';
 
 const HierarquiaObjetivos = () => {
     const [visibilidade, setVisibilidade] = useState({});
-    const [objetivos, setObjetivos] = useState([
-        { 
-            id: "obj1", 
-            nome: "📌 Objetivo 1", 
-            subobjetivos: [
-                { id: "sub1", nome: "✅ Subobjetivo 1.1", acoes: [
-                    { id: "acao1.1.1", nome: "➡️ Ação 1.1.1" },
-                    { id: "acao1.1.2", nome: "➡️ Ação 1.1.2" }
-                ] }
-            ]
-        }
-    ]);
+    const [objetivos, setObjetivos] = useState([]);
     const [novoObjetivo, setNovoObjetivo] = useState("");
     const [novoSubobjetivo, setNovoSubobjetivo] = useState({});
     const [novaAcao, setNovaAcao] = useState({});
@@ -29,7 +18,7 @@ const HierarquiaObjetivos = () => {
     const adicionarObjetivo = () => {
         if (novoObjetivo.trim() !== "") {
             const id = `obj${objetivos.length + 1}`;
-            setObjetivos([...objetivos, { id, nome: `📌 ${novoObjetivo}`, subobjetivos: [] }]);
+            setObjetivos([...objetivos, { id, nome: novoObjetivo, subobjetivos: [] }]);
             setNovoObjetivo("");
         }
     };
@@ -39,7 +28,7 @@ const HierarquiaObjetivos = () => {
             setObjetivos((prev) =>
                 prev.map((obj) =>
                     obj.id === objId
-                        ? { ...obj, subobjetivos: [...obj.subobjetivos, { id: `${objId}-sub${obj.subobjetivos.length + 1}`, nome: `✅ ${novoSubobjetivo[objId]}`, acoes: [] }] }
+                        ? { ...obj, subobjetivos: [...obj.subobjetivos, { id: `${objId}-sub${obj.subobjetivos.length + 1}`, nome: novoSubobjetivo[objId], acoes: [] }] }
                         : obj
                 )
             );
@@ -55,7 +44,7 @@ const HierarquiaObjetivos = () => {
                         ? {
                             ...obj,
                             subobjetivos: obj.subobjetivos.map((sub) =>
-                                sub.id === subId ? { ...sub, acoes: [...sub.acoes, { id: `${subId}-acao${sub.acoes.length + 1}`, nome: `➡️ ${novaAcao[subId]}` }] } : sub
+                                sub.id === subId ? { ...sub, acoes: [...sub.acoes, { id: `${subId}-acao${sub.acoes.length + 1}`, nome: novaAcao[subId] }] } : sub
                             )
                         }
                         : obj
