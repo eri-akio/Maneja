@@ -60,21 +60,21 @@ const HierarquiaObjetivos = () => {
                 {objetivos.map((obj) => (
                     <li key={obj.id}>
                         <span className="cursor-pointer text-blue-600" onClick={() => toggle(obj.id)}>
-                            {obj.nome}
+                            {visibilidade[obj.id] ? "▼" : "▶"} {obj.nome}
                         </span>
                         {visibilidade[obj.id] && (
                             <ul className="ml-4">
                                 {obj.subobjetivos.map((sub) => (
                                     <li key={sub.id}>
                                         <span className="cursor-pointer text-blue-600" onClick={() => toggle(sub.id)}>
-                                            {sub.nome}
+                                            {visibilidade[sub.id] ? "▼" : "▶"} {sub.nome}
                                         </span>
                                         {visibilidade[sub.id] && (
                                             <ul className="ml-8">
                                                 {sub.acoes.map((acao) => (
                                                     <li key={acao.id}>
-                                                        <span className="cursor-pointer text-gray-600" onClick={() => toggle(acao.id)}>
-                                                            {acao.nome}
+                                                        <span className="cursor-pointer text-gray-600">
+                                                          • {acao.nome}
                                                         </span>
                                                     </li>
                                                 ))}
