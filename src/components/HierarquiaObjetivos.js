@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const HierarquiaObjetivos = () => {
+const HierarquiaObjetivos = ({ departamentoId }) => {
     const [visibilidade, setVisibilidade] = useState({});
     const [objetivos, setObjetivos] = useState([]);
     const [novoObjetivo, setNovoObjetivo] = useState("");
     const [novoSubobjetivo, setNovoSubobjetivo] = useState({});
     const [novaAcao, setNovaAcao] = useState({});
+
+    useEffect(() => {
+        // Aqui você pode carregar os objetivos do departamento selecionado
+        // Por exemplo, de uma API ou do localStorage
+        // setObjetivos(objetivosDoDepartamento);
+    }, [departamentoId]);
 
     const toggle = (id) => {
         setVisibilidade((prev) => ({
