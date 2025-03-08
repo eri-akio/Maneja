@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 
 const MenuLateral = () => {
@@ -20,10 +21,14 @@ const MenuLateral = () => {
         }
     };
 
+=======
+const MenuLateral = () => {
+>>>>>>> c9ae44883f71eb643ef6ba1c8157e1f6f52da492
     return (
         <div className="w-64 h-screen bg-gray-800 text-white p-4">
             <h2 className="text-xl font-bold mb-4">Menu</h2>
             <ul>
+<<<<<<< HEAD
                 {departamentos.map((dep) => (
                     <li key={dep.id} className="mt-2">
                         <span className="cursor-pointer text-blue-400" onClick={() => toggle(dep.id)}>
@@ -46,9 +51,18 @@ const MenuLateral = () => {
                         + Adicionar Departamento
                     </button>
                 </li>
+=======
+                <li className="mb-2 cursor-pointer hover:text-gray-400">Opção 1</li>
+                <li className="mb-2 cursor-pointer hover:text-gray-400">Opção 2</li>
+                <li className="mb-2 cursor-pointer hover:text-gray-400">Opção 3</li>
+>>>>>>> c9ae44883f71eb643ef6ba1c8157e1f6f52da492
             </ul>
         </div>
     );
 };
 
+<<<<<<< HEAD
 export default MenuLateral;
+=======
+export default MenuLateral;
+>>>>>>> c9ae44883f71eb643ef6ba1c8157e1f6f52da492
