@@ -1,0 +1,71 @@
+.container {
+    display: flex; 
+    height: 100vh; 
+}
+
+.menu {
+    width: 250px; 
+    background-color: #2d3748;
+    color: white; 
+    padding: 20px; 
+    border-right: 1px solid #4a5568; 
+}
+
+.menu-title {
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    margin-bottom: 20px; 
+}
+
+.departamento-item {
+    margin-bottom: 10px; 
+}
+
+.departamento-nome {
+    cursor: pointer; 
+    color: #63b3ed; 
+}
+
+.departamento-nome:hover {
+    text-decoration: underline; 
+}
+
+.adicionar-departamento {
+    margin-top: 20px; 
+}
+
+.input-departamento {
+    width: 100%; 
+    padding: 8px; 
+    border: 1px solid #4a5568; 
+    border-radius: 4px; 
+    background-color: #1a202c; 
+    color: white; 
+}
+
+.botao-adicionar {
+    width: 100%; 
+    margin-top: 10px; 
+    padding: 8px; 
+    background-color: #e53e3e; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+}
+
+.botao-adicionar:hover {
+    background-color: #c53030; 
+}
+
+.objetivos {
+    flex-grow: 1; 
+    padding: 20px; 
+    background-color: #f7fafc; 
+}
+
+.objetivos-titulo {
+    font-size: 1.5rem;
+    font-weight: bold; 
+    margin-bottom: 20px; 
+}

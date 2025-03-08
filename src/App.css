@@ -1,21 +1,3 @@
-.App {
-  display: flex;
-  flex-direction: row; /* Alinha os elementos na horizontal */
-  height: 100vh; /* Define a altura total da tela */
-
-}
-
-.MenuLateral {
-  width: 250px; /* Define uma largura fixa para o menu lateral */
-  background-color: #f4f4f4; /* Cor de fundo opcional */
-  padding: 10px;
-}
-
-.HierarquiaObjetivos {
-  flex-grow: 1; /* Ocupa o restante do espaço disponível */
-  padding: 10px;
-}
-
 li{
   list-style-type: none;
 }

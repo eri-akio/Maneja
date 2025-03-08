@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import HierarquiaObjetivos from './HierarquiaObjetivos';
+import '../styles/MenuLateral.css'
 
 const MenuLateral = () => {
     const [departamentos, setDepartamentos] = useState([]);
@@ -36,31 +37,31 @@ const MenuLateral = () => {
     };
 
     return (
-        <div className="flex">
-            <div className="w-64 h-screen bg-gray-800 text-white p-4">
-                <h2 className="text-xl font-bold mb-4">Menu</h2>
-                <ul>
+        <div className="container">
+            <div className="menu">
+                <h2 className="menu-title">Maneja</h2>
+                <ul className="menu-lista">
                     {departamentos.map((dep) => (
-                        <li key={dep.id} className="mt-2">
+                        <li key={dep.id} className="departamento-item">
                             <span
-                                className="cursor-pointer text-blue-400"
+                                className="departamento-nome"
                                 onClick={() => selecionarDepartamento(dep)}
                             >
                                 {dep.nome}
                             </span>
                         </li>
                     ))}
-                    <li className="mt-4">
+                    <li className="adicionar-departamento">
                         <input
                             type="text"
                             value={novoDepartamento}
                             onChange={(e) => setNovoDepartamento(e.target.value)}
-                            className="p-2 border rounded mr-2 text-black"
+                            className="input-departamento"
                             placeholder="Novo departamento"
                         />
                         <button
                             onClick={adicionarDepartamento}
-                            className="p-2 bg-red-500 text-white rounded"
+                            className="botao-adicionar"
                         >
                             + Adicionar Departamento
                         </button>
@@ -68,8 +69,8 @@ const MenuLateral = () => {
                 </ul>
             </div>
             {departamentoSelecionado && (
-                <div className="flex-1 p-4">
-                    <h2 className="text-xl font-bold mb-4">{departamentoSelecionado.nome}</h2>
+                <div className="objetivos">
+                    <h2 className="objetivos-titulo">{departamentoSelecionado.nome}</h2>
                     <HierarquiaObjetivos
                         departamentoId={departamentoSelecionado.id}
                         objetivos={objetivosPorDepartamento[departamentoSelecionado.id] || []}

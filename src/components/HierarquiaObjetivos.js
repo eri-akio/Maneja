@@ -60,42 +60,42 @@ const HierarquiaObjetivos = ({ departamentoId, objetivos, adicionarObjetivo, set
     };
 
     return (
-        <div className="p-4">
-            <ul className="list-none">
+        <div className="">
+            <ul className="">
                 {objetivos.map((obj) => (
                     <li key={obj.id}>
-                        <span className="cursor-pointer text-blue-600" onClick={() => toggle(obj.id)}>
+                        <span className="" onClick={() => toggle(obj.id)}>
                             {visibilidade[obj.id] ? "▼" : "▶"} {obj.nome}
                         </span>
                         {visibilidade[obj.id] && (
-                            <ul className="ml-4">
+                            <ul className="">
                                 {obj.subobjetivos.map((sub) => (
                                     <li key={sub.id}>
-                                        <span className="cursor-pointer text-blue-600" onClick={() => toggle(sub.id)}>
+                                        <span className="" onClick={() => toggle(sub.id)}>
                                             {visibilidade[sub.id] ? "▼" : "▶"} {sub.nome}
                                         </span>
                                         {visibilidade[sub.id] && (
-                                            <ul className="ml-8">
+                                            <ul className="">
                                                 {sub.acoes.map((acao) => (
                                                     <li key={acao.id}>
-                                                        <span className="cursor-pointer text-gray-600">
+                                                        <span className="">
                                                             • {acao.nome}
                                                         </span>
                                                     </li>
                                                 ))}
-                                                <li className="mt-2">
+                                                <li className="">
                                                     <input
                                                         type="text"
                                                         value={novaAcao[sub.id] || ""}
                                                         onChange={(e) =>
                                                             setNovaAcao((prev) => ({ ...prev, [sub.id]: e.target.value }))
                                                         }
-                                                        className="p-2 border rounded mr-2"
+                                                        className=""
                                                         placeholder="Nova ação"
                                                     />
                                                     <button
                                                         onClick={() => adicionarAcao(sub.id, obj.id)}
-                                                        className="p-2 bg-blue-500 text-white rounded"
+                                                        className=""
                                                     >
                                                         + Adicionar Ação
                                                     </button>
@@ -104,19 +104,19 @@ const HierarquiaObjetivos = ({ departamentoId, objetivos, adicionarObjetivo, set
                                         )}
                                     </li>
                                 ))}
-                                <li className="mt-4">
+                                <li className="">
                                     <input
                                         type="text"
                                         value={novoSubobjetivo[obj.id] || ""}
                                         onChange={(e) =>
                                             setNovoSubobjetivo((prev) => ({ ...prev, [obj.id]: e.target.value }))
                                         }
-                                        className="p-2 border rounded mr-2"
+                                        className=""
                                         placeholder="Novo subobjetivo"
                                     />
                                     <button
                                         onClick={() => adicionarSubobjetivo(obj.id)}
-                                        className="p-2 bg-green-500 text-white rounded"
+                                        className=""
                                     >
                                         + Adicionar Subobjetivo
                                     </button>
@@ -125,12 +125,12 @@ const HierarquiaObjetivos = ({ departamentoId, objetivos, adicionarObjetivo, set
                         )}
                     </li>
                 ))}
-                <li className="mt-4">
+                <li className="">
                     <input
                         type="text"
                         value={novoObjetivo}
                         onChange={(e) => setNovoObjetivo(e.target.value)}
-                        className="p-2 border rounded mr-2"
+                        className=""
                         placeholder="Novo objetivo"
                     />
                     <button
@@ -138,7 +138,7 @@ const HierarquiaObjetivos = ({ departamentoId, objetivos, adicionarObjetivo, set
                             adicionarObjetivo(departamentoId, novoObjetivo);
                             setNovoObjetivo("");
                         }}
-                        className="p-2 bg-red-500 text-white rounded"
+                        className=""
                     >
                         + Adicionar Objetivo
                     </button>
