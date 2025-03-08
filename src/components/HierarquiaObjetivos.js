@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-const HierarquiaObjetivos = ({ departamentoId }) => {
+const HierarquiaObjetivos = ({ departamentoId, objetivos, adicionarObjetivo, setObjetivosPorDepartamento }) => {
     const [visibilidade, setVisibilidade] = useState({});
-    const [objetivos, setObjetivos] = useState([]);
     const [novoObjetivo, setNovoObjetivo] = useState("");
     const [novoSubobjetivo, setNovoSubobjetivo] = useState({});
     const [novaAcao, setNovaAcao] = useState({});
-
-    useEffect(() => {
-        // Aqui você pode carregar os objetivos do departamento selecionado
-        // Por exemplo, de uma API ou do localStorage
-        // setObjetivos(objetivosDoDepartamento);
-    }, [departamentoId]);
 
     const toggle = (id) => {
         setVisibilidade((prev) => ({
@@ -20,41 +13,48 @@ const HierarquiaObjetivos = ({ departamentoId }) => {
         }));
     };
 
-    const adicionarObjetivo = () => {
-        if (novoObjetivo.trim() !== "") {
-            const id = `obj${objetivos.length + 1}`;
-            setObjetivos([...objetivos, { id, nome: novoObjetivo, subobjetivos: [] }]);
-            setNovoObjetivo("");
-        }
-    };
-
     const adicionarSubobjetivo = (objId) => {
         if (novoSubobjetivo[objId]?.trim()) {
-            setObjetivos((prev) =>
-                prev.map((obj) =>
-                    obj.id === objId
-                        ? { ...obj, subobjetivos: [...obj.subobjetivos, { id: `${objId}-sub${obj.subobjetivos.length + 1}`, nome: novoSubobjetivo[objId], acoes: [] }] }
-                        : obj
-                )
+            const novoSub = {
+                id: `${objId}-sub${objetivos.find((obj) => obj.id === objId).subobjetivos.length + 1}`,
+                nome: novoSubobjetivo[objId],
+                acoes: [],
+            };
+            const objetivosAtualizados = objetivos.map((obj) =>
+                obj.id === objId
+                    ? { ...obj, subobjetivos: [...obj.subobjetivos, novoSub] }
+                    : obj
             );
+            setObjetivosPorDepartamento((prev) => ({
+                ...prev,
+                [departamentoId]: objetivosAtualizados,
+            }));
             setNovoSubobjetivo((prev) => ({ ...prev, [objId]: "" }));
         }
     };
 
     const adicionarAcao = (subId, objId) => {
         if (novaAcao[subId]?.trim()) {
-            setObjetivos((prev) =>
-                prev.map((obj) =>
-                    obj.id === objId
-                        ? {
-                            ...obj,
-                            subobjetivos: obj.subobjetivos.map((sub) =>
-                                sub.id === subId ? { ...sub, acoes: [...sub.acoes, { id: `${subId}-acao${sub.acoes.length + 1}`, nome: novaAcao[subId] }] } : sub
-                            )
-                        }
-                        : obj
-                )
+            const novaAcaoObj = {
+                id: `${subId}-acao${objetivos
+                    .find((obj) => obj.id === objId)
+                    .subobjetivos.find((sub) => sub.id === subId).acoes.length + 1}`,
+                nome: novaAcao[subId],
+            };
+            const objetivosAtualizados = objetivos.map((obj) =>
+                obj.id === objId
+                    ? {
+                        ...obj,
+                        subobjetivos: obj.subobjetivos.map((sub) =>
+                            sub.id === subId ? { ...sub, acoes: [...sub.acoes, novaAcaoObj] } : sub
+                        ),
+                    }
+                    : obj
             );
+            setObjetivosPorDepartamento((prev) => ({
+                ...prev,
+                [departamentoId]: objetivosAtualizados,
+            }));
             setNovaAcao((prev) => ({ ...prev, [subId]: "" }));
         }
     };
@@ -134,7 +134,7 @@ const HierarquiaObjetivos = ({ departamentoId }) => {
                         placeholder="Novo objetivo"
                     />
                     <button
-                        onClick={adicionarObjetivo}
+                        onClick={() => adicionarObjetivo(departamentoId, novoObjetivo)}
                         className="p-2 bg-red-500 text-white rounded"
                     >
                         + Adicionar Objetivo
