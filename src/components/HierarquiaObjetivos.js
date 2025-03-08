@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styles/HierarquiaObjetivos.css'
 
 const HierarquiaObjetivos = ({ departamentoId, objetivos, adicionarObjetivo, setObjetivosPorDepartamento }) => {
     const [visibilidade, setVisibilidade] = useState({});
@@ -60,42 +61,42 @@ const HierarquiaObjetivos = ({ departamentoId, objetivos, adicionarObjetivo, set
     };
 
     return (
-        <div className="">
-            <ul className="">
+        <div className="hierarquia-container">
+            <ul className="objetivo-lista">
                 {objetivos.map((obj) => (
-                    <li key={obj.id}>
-                        <span className="" onClick={() => toggle(obj.id)}>
+                    <li key={obj.id} className="objetivo-item">
+                        <span className="objetivo-titulo" onClick={() => toggle(obj.id)}>
                             {visibilidade[obj.id] ? "▼" : "▶"} {obj.nome}
                         </span>
                         {visibilidade[obj.id] && (
-                            <ul className="">
+                            <ul className="subobjetivo-lista">
                                 {obj.subobjetivos.map((sub) => (
-                                    <li key={sub.id}>
-                                        <span className="" onClick={() => toggle(sub.id)}>
+                                    <li key={sub.id} className="subobjetivo-item">
+                                        <span className="subobjetivo-titulo" onClick={() => toggle(sub.id)}>
                                             {visibilidade[sub.id] ? "▼" : "▶"} {sub.nome}
                                         </span>
                                         {visibilidade[sub.id] && (
-                                            <ul className="">
+                                            <ul className="acao-lista">
                                                 {sub.acoes.map((acao) => (
-                                                    <li key={acao.id}>
-                                                        <span className="">
+                                                    <li key={acao.id} className="acao-item">
+                                                        <span className="acao-titulo">
                                                             • {acao.nome}
                                                         </span>
                                                     </li>
                                                 ))}
-                                                <li className="">
+                                                <li className="adicionar-acao">
                                                     <input
                                                         type="text"
                                                         value={novaAcao[sub.id] || ""}
                                                         onChange={(e) =>
                                                             setNovaAcao((prev) => ({ ...prev, [sub.id]: e.target.value }))
                                                         }
-                                                        className=""
+                                                        className="input-acao"
                                                         placeholder="Nova ação"
                                                     />
                                                     <button
                                                         onClick={() => adicionarAcao(sub.id, obj.id)}
-                                                        className=""
+                                                        className="adicionar-acao-btn"
                                                     >
                                                         + Adicionar Ação
                                                     </button>
@@ -104,19 +105,19 @@ const HierarquiaObjetivos = ({ departamentoId, objetivos, adicionarObjetivo, set
                                         )}
                                     </li>
                                 ))}
-                                <li className="">
+                                <li className="adicionar-subobjetivo">
                                     <input
                                         type="text"
                                         value={novoSubobjetivo[obj.id] || ""}
                                         onChange={(e) =>
                                             setNovoSubobjetivo((prev) => ({ ...prev, [obj.id]: e.target.value }))
                                         }
-                                        className=""
+                                        className="input-subobjetivo"
                                         placeholder="Novo subobjetivo"
                                     />
                                     <button
                                         onClick={() => adicionarSubobjetivo(obj.id)}
-                                        className=""
+                                        className="adicionar-subobjetivo-btn"
                                     >
                                         + Adicionar Subobjetivo
                                     </button>
@@ -125,12 +126,12 @@ const HierarquiaObjetivos = ({ departamentoId, objetivos, adicionarObjetivo, set
                         )}
                     </li>
                 ))}
-                <li className="">
+                <li className="adicionar-objetivo">
                     <input
                         type="text"
                         value={novoObjetivo}
                         onChange={(e) => setNovoObjetivo(e.target.value)}
-                        className=""
+                        className="input-objetivo"
                         placeholder="Novo objetivo"
                     />
                     <button
@@ -138,7 +139,7 @@ const HierarquiaObjetivos = ({ departamentoId, objetivos, adicionarObjetivo, set
                             adicionarObjetivo(departamentoId, novoObjetivo);
                             setNovoObjetivo("");
                         }}
-                        className=""
+                        className="adicionar-objetivo-btn"
                     >
                         + Adicionar Objetivo
                     </button>
