@@ -134,7 +134,10 @@ const HierarquiaObjetivos = ({ departamentoId, objetivos, adicionarObjetivo, set
                         placeholder="Novo objetivo"
                     />
                     <button
-                        onClick={() => adicionarObjetivo(departamentoId, novoObjetivo)}
+                        onClick={() => {
+                            adicionarObjetivo(departamentoId, novoObjetivo);
+                            setNovoObjetivo("");
+                        }}
                         className="p-2 bg-red-500 text-white rounded"
                     >
                         + Adicionar Objetivo
